@@ -80,6 +80,21 @@ Download speed:       9.86 MB/s
 computed as total MB ÷ total seconds across all requests. Average request time
 is in seconds.*
 
+## Тесты / Tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+Набор включает юнит-тесты чистых функций (`format_report`, `parse_args`),
+мок-тест цикла `measure()` (без реальной сети) и герметичный интеграционный тест
+против локального `http.server`. Все тесты детерминированы и не ходят в интернет.
+
+*Unit tests for the pure functions, a mocked `measure()` loop test, and a
+hermetic integration test against a local `http.server` — all deterministic,
+no external network.*
+
 ## Документация / Docs
 
 - [`docs/PLAN.md`](docs/PLAN.md) — план и проектные решения / plan & design decisions
