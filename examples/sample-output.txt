@@ -1,0 +1,19 @@
+$ python speedtest.py "https://speed.cloudflare.com/__down?bytes=10000000"
+
+Downloading https://speed.cloudflare.com/__down?bytes=10000000 10 times...
+  request 1/10: 10.00 MB in 6.055 s
+  request 2/10: 10.00 MB in 5.753 s
+  request 3/10: 10.00 MB in 4.489 s
+  request 4/10: 10.00 MB in 4.552 s
+  request 5/10: 10.00 MB in 4.854 s
+  request 6/10: 10.00 MB in 4.651 s
+  request 7/10: 10.00 MB in 6.220 s
+  request 8/10: 10.00 MB in 3.938 s
+  request 9/10: 10.00 MB in 3.889 s
+  request 10/10: 10.00 MB in 4.436 s
+
+Target:               https://speed.cloudflare.com/__down?bytes=10000000
+Requests:             10
+Total downloaded:     100.00 MB
+Average request time: 4.884 s
+Download speed:       2.05 MB/s

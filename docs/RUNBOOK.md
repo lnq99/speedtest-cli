@@ -14,16 +14,25 @@ pip install -r requirements.txt
 python speedtest.py <URL>
 ```
 
-Пример:
+Пример (проверенные публичные ссылки):
 
 ```bash
-python speedtest.py https://images.unsplash.com/photo-1506744038136-46273834b3fb
+# 10 МБ, настраиваемый размер — самый стабильный вариант
+python speedtest.py "https://speed.cloudflare.com/__down?bytes=10000000"
+
+# случайная «тяжёлая» картинка
+python speedtest.py "https://picsum.photos/2000/2000"
 ```
+
+> ⚠️ URL с `?` берите в кавычки, иначе zsh/bash попытается раскрыть его как
+> шаблон («no matches found»).
 
 Советы по выбору URL:
 - Берите **тяжёлый** статичный файл (картинку/архив) — чем больше объём, тем
   точнее замер.
 - Прямая ссылка на файл, без редиректов на HTML-страницу.
+
+Пример полного вывода — см. [`../examples/sample-output.txt`](../examples/sample-output.txt).
 
 ## 3. Флаги
 
@@ -47,7 +56,21 @@ Download speed:       9.86 MB/s    <- суммарный объём / сумма
 
 Скорость — в **мегабайтах в секунду** (MB/s, 1 MB = 1 000 000 байт).
 
-## 5. Частые ошибки
+## 5. Запуск тестов
+
+Запускать **из корня проекта** (там лежит `pyproject.toml`, который добавляет
+корень в `sys.path`):
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+Ожидается `7 passed`. Если видите `ModuleNotFoundError: No module named
+'speedtest'` — значит `pytest` запущен не из корня проекта; перейдите в каталог
+`speedtest-cli` и повторите.
+
+## 6. Частые ошибки
 
 | Симптом | Причина | Что делать |
 |---------|---------|------------|

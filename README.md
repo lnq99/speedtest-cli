@@ -30,11 +30,20 @@ pip install -r requirements.txt
 python speedtest.py <URL>
 ```
 
-Пример / Example (публичная тяжёлая картинка / a public heavy image):
+Пример / Example (проверенные публичные ссылки / verified public URLs):
 
 ```bash
-python speedtest.py https://images.unsplash.com/photo-1506744038136-46273834b3fb
+# 10 МБ, настраиваемый размер / 10 MB, tunable size
+python speedtest.py "https://speed.cloudflare.com/__down?bytes=10000000"
+
+# случайная тяжёлая картинка / a random heavy image
+python speedtest.py "https://picsum.photos/2000/2000"
 ```
+
+> ⚠️ Берите URL с `?` в кавычки / quote URLs containing `?` (иначе zsh/bash
+> попытается раскрыть шаблон).
+
+Готовый пример вывода / a full example run: [`examples/sample-output.txt`](examples/sample-output.txt).
 
 По умолчанию делается **10** запросов. Количество можно изменить флагом `-n`:
 
