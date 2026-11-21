@@ -1,36 +1,22 @@
 # speedtest-cli
 
-Консольный скрипт на Python, который замеряет скорость скачивания: делает N
-последовательных запросов к указанному URL (например, к тяжёлой картинке),
-полностью скачивает каждый ответ и печатает средний объём, среднее время запроса
-и скорость скачивания.
+Консольный скрипт на Python: делает N последовательных запросов к указанному URL
+(например, к тяжёлой картинке), полностью скачивает каждый ответ и печатает общий
+объём, среднее время запроса и скорость скачивания.
 
-*A console Python script that measures download speed: it makes N sequential
-requests to a given URL, fully downloads each response, and prints the total
-data, the average request time, and the download speed.*
-
-## Требования / Requirements
-
-- Python 3.8+
-- `requests` (устанавливается из `requirements.txt`)
+*A console Python script: makes N sequential requests to a URL, fully downloads
+each response, and prints total data, average request time, and download speed.*
 
 ## Установка / Install
 
-```bash
-# по желанию: виртуальное окружение / optional: virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
+Нужен Python 3.8+.
 
+```bash
+python3 -m venv .venv && source .venv/bin/activate   # по желанию / optional
 pip install -r requirements.txt
 ```
 
 ## Запуск / Run
-
-```bash
-python speedtest.py <URL>
-```
-
-Пример / Example (проверенные публичные ссылки / verified public URLs):
 
 ```bash
 # 10 МБ, настраиваемый размер / 10 MB, tunable size
@@ -38,20 +24,16 @@ python speedtest.py "https://speed.cloudflare.com/__down?bytes=10000000"
 
 # случайная тяжёлая картинка / a random heavy image
 python speedtest.py "https://picsum.photos/2000/2000"
-```
 
-> ⚠️ Берите URL с `?` в кавычки / quote URLs containing `?` (иначе zsh/bash
-> попытается раскрыть шаблон).
-
-Готовый пример вывода / a full example run: [`examples/sample-output.txt`](examples/sample-output.txt).
-
-По умолчанию делается **10** запросов. Количество можно изменить флагом `-n`:
-
-```bash
+# по умолчанию 10 запросов; меняется флагом / default 10 requests; tune with -n
 python speedtest.py <URL> -n 5 --timeout 15
 ```
 
-### Параметры / Options
+> ⚠️ URL с `?` берите в кавычки / quote URLs containing `?` (иначе zsh/bash
+> раскроет его как шаблон).
+
+Готовый пример вывода / full example run:
+[`examples/sample-output.txt`](examples/sample-output.txt).
 
 ```text
 $ python speedtest.py -h
@@ -68,54 +50,32 @@ options:
   --timeout TIMEOUT     per-request timeout in seconds (default: 30)
 ```
 
-## Пример вывода / Example output
-
-```
-Downloading https://example.com/image.jpg 10 times...
-  request 1/10: 4.25 MB in 0.431 s
-  ...
-  request 10/10: 4.25 MB in 0.402 s
-
-Target:               https://example.com/image.jpg
-Requests:             10
-Total downloaded:     42.50 MB
-Average request time: 0.431 s
-Download speed:       9.86 MB/s
-```
-
 ## Единицы измерения / Units
 
 Скорость печатается в **MB/s — мегабайтах в секунду** (megabytes per second).
 
 - 1 MB = 1 000 000 байт (десятичный мегабайт, как принято для скорости передачи
-  данных; это отличается от MiB = 1 048 576 байт).
-- Скорость считается как `общий объём (в MB) / общее время (в секундах)` по всем
-  запросам — это суммарная пропускная способность, а не среднее по отдельным
-  запросам.
-- «Average request time» (среднее время запроса) печатается в **секундах**.
+  данных; отличается от MiB = 1 048 576 байт).
+- Скорость = `общий объём (MB) / общее время (с)` по всем запросам — суммарная
+  пропускная способность, а не среднее по отдельным запросам.
+- «Average request time» печатается в **секундах**.
 
-*Speed is reported in **MB/s** (decimal megabytes, 1 MB = 1,000,000 bytes),
-computed as total MB ÷ total seconds across all requests. Average request time
-is in seconds.*
+*Speed in **MB/s** (decimal, 1 MB = 1,000,000 bytes) = total MB ÷ total seconds
+across all requests. Average request time is in seconds.*
 
 ## Тесты / Tests
 
 ```bash
 pip install -r requirements-dev.txt
-pytest
+pytest        # из корня проекта / from the project root
 ```
 
-Набор включает юнит-тесты чистых функций (`format_report`, `parse_args`),
-мок-тест цикла `measure()` (без реальной сети) и герметичный интеграционный тест
-против локального `http.server`. Все тесты детерминированы и не ходят в интернет.
-
-*Unit tests for the pure functions, a mocked `measure()` loop test, and a
-hermetic integration test against a local `http.server` — all deterministic,
-no external network.*
+Юнит-тесты чистых функций, мок-тест цикла `measure()` и герметичный
+интеграционный тест против локального `http.server` — детерминированы, без
+внешней сети.
 
 ## Документация / Docs
 
-- [`docs/PLAN.md`](docs/PLAN.md) — план и проектные решения / plan & design decisions
-- [`docs/RUNBOOK.md`](docs/RUNBOOK.md) — как запускать и читать результат / how to run
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — как устроен код / how the code works
-- [`docs/AI_USAGE.md`](docs/AI_USAGE.md) — как использовался ИИ / how AI was used
+- [`docs/PLAN.md`](docs/PLAN.md) — решения / design decisions
+- [`docs/RUNBOOK.md`](docs/RUNBOOK.md) — запуск и ошибки / how to run
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — устройство кода / how the code works

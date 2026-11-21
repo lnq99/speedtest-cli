@@ -12,3 +12,6 @@ env/
 .DS_Store
 .idea/
 .vscode/
+
+# Local-only: AI usage notes (not published)
+docs/AI_USAGE.md
