@@ -53,11 +53,20 @@ python speedtest.py <URL> -n 5 --timeout 15
 
 ### Параметры / Options
 
-| Флаг | Описание |
-|------|----------|
-| `url` | адрес, к которому стучаться (обязательный) |
-| `-n`, `--requests` | число последовательных запросов (по умолчанию 10) |
-| `--timeout` | таймаут одного запроса в секундах (по умолчанию 30) |
+```text
+$ python speedtest.py -h
+usage: speedtest.py [-h] [-n COUNT] [--timeout TIMEOUT] url
+
+Measure download speed by repeatedly downloading a URL.
+
+positional arguments:
+  url                   URL to download, e.g. a heavy image
+
+options:
+  -h, --help            show this help message and exit
+  -n, --requests COUNT  number of sequential requests (default: 10)
+  --timeout TIMEOUT     per-request timeout in seconds (default: 30)
+```
 
 ## Пример вывода / Example output
 
